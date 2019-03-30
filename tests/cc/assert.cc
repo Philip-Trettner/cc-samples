@@ -9,7 +9,9 @@ struct assertion
 };
 
 void foo(int i) { ASSERT(i >= 0); }
-void bounds(int i, int a, int b) { CC_BOUND_CHECK(i, a, b); }
+void bounds(int i, int a, int b) { CC_ASSERT_IN_BOUNDS(i, a, b); }
+void assert_is_null(int* p) { CC_ASSERT_IS_NULL(p); }
+void assert_not_null(int* p) { CC_ASSERT_NOT_NULL(p); }
 
 void throwing_handler(cc::detail::assertion_info const&) { throw assertion(); }
 } // namespace
@@ -36,6 +38,12 @@ TEST_CASE("assertions")
     CHECK_NOTHROW(bounds(6, 5, 7));
     CHECK_THROWS_AS(bounds(4, 5, 7), assertion);
     CHECK_THROWS_AS(bounds(7, 5, 7), assertion);
+
+    int i;
+    CHECK_NOTHROW(assert_is_null(nullptr));
+    CHECK_THROWS_AS(assert_is_null(&i), assertion);
+    CHECK_NOTHROW(assert_not_null(&i));
+    CHECK_THROWS_AS(assert_not_null(nullptr), assertion);
 
     cc::set_assertion_handler(nullptr);
 }
