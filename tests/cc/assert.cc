@@ -1,4 +1,4 @@
-#include <doctest/doctest.h>
+#include <doctest.hh>
 
 #include <cc/assert>
 

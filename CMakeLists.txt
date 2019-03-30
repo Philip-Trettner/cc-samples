@@ -23,11 +23,11 @@ add_subdirectory(extern/clean-core)
 # Compile flags
 
 if (MSVC)
-    set(SAMPLE_FLAGS 
+    set(SAMPLE_FLAGS
         /MP
     )
 else()
-    set(SAMPLE_FLAGS 
+    set(SAMPLE_FLAGS
         -Wall
         -Wno-unused-variable
         -Wpedantic
@@ -42,11 +42,6 @@ endif()
 
 if (CC_BUILD_TESTS)
 
-    # doctest test library
-    option(DOCTEST_WITH_TESTS "" OFF)
-    option(DOCTEST_WITH_MAIN_IN_STATIC_LIB  "" OFF)
-    add_subdirectory(extern/doctest)
-
     file(GLOB_RECURSE SOURCES
         "tests/*.cc"
         "tests/*.hh"
@@ -58,7 +53,6 @@ if (CC_BUILD_TESTS)
 
     target_link_libraries(cc-tests PUBLIC
         clean-core
-        doctest
     )
 
     target_include_directories(cc-tests PUBLIC "tests")
@@ -74,7 +68,7 @@ endif()
 foreach(TARGET_NAME
     clean-core
 )
-    if (TARGET ${TARGET_NAME}) 
-        set_property(TARGET ${TARGET_NAME} PROPERTY FOLDER "Extern") 
+    if (TARGET ${TARGET_NAME})
+        set_property(TARGET ${TARGET_NAME} PROPERTY FOLDER "Extern")
     endif()
 endforeach()
