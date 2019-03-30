@@ -1,0 +1,6 @@
+[submodule "extern/clean-core"]
+	path = extern/clean-core
+	url = git@github.com:Philip-Trettner/clean-core.git
+[submodule "extern/doctest"]
+	path = extern/doctest
+	url = https://github.com/onqtam/doctest.git
